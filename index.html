@@ -1,0 +1,144 @@
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>発注システムランチャー</title>
+  <link href="https://fonts.googleapis.com/css2?family=BIZ+UDGothic&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --blue-dark: #709cec;
+      --blue-light: #2a5298;
+      --card-bg: #ffffff;
+      --text-color: #2a5298;
+      --hover-bg: #f0f4f8;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'BIZ UDGothic', sans-serif;
+      background: linear-gradient(to right, var(--blue-dark), var(--blue-light));
+      color: var(--text-color);
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    .container {
+      max-width: 500px;
+      margin: auto;
+      padding: 40px 20px;
+    }
+
+    .title {
+      color: white;
+      text-align: center;
+      margin-bottom: 40px;
+      font-size: 24px;
+      font-weight: bold;
+      letter-spacing: 1px;
+    }
+
+    .card-row {
+      display: flex;
+      justify-content: space-around;
+      margin-bottom: 40px;
+    }
+
+    .card {
+      background-color: var(--card-bg);
+      width: 120px;
+      height: 120px;
+      border-radius: 20px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      transition: transform 0.2s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+    }
+
+    .card img {
+      width: 48px;
+      height: 48px;
+      margin-bottom: 10px;
+    }
+
+    .card-label {
+      font-size: 14px;
+      font-weight: bold;
+      color: var(--text-color);
+    }
+
+    .link-list {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    .link-item {
+      display: flex;
+      align-items: center;
+      background-color: var(--card-bg);
+      border-radius: 12px;
+      padding: 15px 20px;
+      text-decoration: none;
+      font-weight: bold;
+      color: var(--text-color);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+      transition: background-color 0.2s ease;
+    }
+
+    .link-item:hover {
+      background-color: var(--hover-bg);
+    }
+
+    .link-item img {
+      width: 24px;
+      height: 24px;
+      margin-right: 12px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="title">谷口ハートクリニック<br>発注ポータル</div>
+
+    <div class="card-row">
+      <a href="https://docs.google.com/forms/d/e/1FAIpQLScXFDf3uCYEedzbE8vOteBPPaWsQr3YzocuD0_54OoaROGeMg/viewform?usp=preview" class="card">
+        <img src="https://img.icons8.com/ios-filled/50/shopping-cart.png" alt="発注">
+        <div class="card-label">発注する</div>
+      </a>
+      <a href="https://docs.google.com/forms/d/e/1FAIpQLSd6Vb55RfgEI2KJzyHM8rX0kSzNrSD6W_ah3dLps2TtQGg87A/viewform?usp=preview" class="card">
+        <img src="https://img.icons8.com/ios-filled/50/open-box.png" alt="受領">
+        <div class="card-label">受領する</div>
+      </a>
+    </div>
+
+    <div class="link-list">
+      <a href="https://docs.google.com/spreadsheets/d/1ZhVBCmtiEroldgOFnBiWsqTdmc8O301vYU2L3IVO-u8/edit?usp=sharing" class="link-item">
+        <img src="https://img.icons8.com/ios-filled/50/activity-history.png" alt="履歴">
+        発注履歴
+      </a>
+      <a href="https://docs.google.com/spreadsheets/d/1nt0l95dU44wB_dYeZAldIMKg6eYJ9_jCsW0HUqD_rlQ/edit?usp=sharing" class="link-item">
+        <img src="https://img.icons8.com/ios-filled/50/calendar--v1.png" alt="月別">
+        月別発注履歴
+      </a>
+      <a href="https://docs.google.com/spreadsheets/d/1N-Sd0pnFu5-VKhqrtKl2ONaEpNq5PCigtyMXUFbsYlk/edit?usp=sharing" class="link-item">
+        <img src="https://img.icons8.com/ios-filled/50/combo-chart.png" alt="年度集計">
+        年度別発注数集計
+      </a>
+      <a href="#" class="link-item">
+        <img src="https://img.icons8.com/ios-filled/50/help.png" alt="ガイド">
+        操作ガイド
+      </a>
+    </div>
+  </div>
+</body>
+</html>
