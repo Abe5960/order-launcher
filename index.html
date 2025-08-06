@@ -5,75 +5,156 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>発注システムランチャー</title>
-  <link href="https://fonts.googleapis.com/css2?family=BIZ+UDGothic&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --blue-dark: #709cec;
-      --blue-light: #2a5298;
-      --card-bg: #ffffff;
-      --text-color: #2a5298;
-      --hover-bg: #f0f4f8;
+      --sumi-dark: #2c3e50;
+      --sumi-light: #34495e;
+      --washi: #f8f6f0;
+      --washi-shadow: rgba(44, 62, 80, 0.1);
+      --indigo: #4a5568;
+      --moss: #68d391;
+      --gold: #d69e2e;
+      --red-brown: #c53030;
+      --text-primary: #2d3748;
+      --text-secondary: #4a5568;
+      --border-color: rgba(44, 62, 80, 0.15);
     }
 
     body {
       margin: 0;
-      font-family: 'BIZ UDGothic', sans-serif;
-      background: linear-gradient(to right, var(--blue-dark), var(--blue-light));
-      color: var(--text-color);
+      font-family: 'Noto Serif JP', serif;
+      background: linear-gradient(180deg, #f7fafc 0%, #edf2f7 100%);
+      color: var(--text-primary);
       display: flex;
       flex-direction: column;
       min-height: 100vh;
+      position: relative;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-image: 
+        radial-gradient(circle at 25% 25%, rgba(104, 211, 145, 0.03) 0%, transparent 25%),
+        radial-gradient(circle at 75% 75%, rgba(214, 158, 46, 0.03) 0%, transparent 25%);
+      pointer-events: none;
+      z-index: 0;
     }
 
     .container {
       max-width: 500px;
       margin: auto;
       padding: 40px 20px;
+      position: relative;
+      z-index: 1;
     }
 
     .title {
-      color: white;
+      color: var(--sumi-dark);
       text-align: center;
-      margin-bottom: 40px;
-      font-size: 24px;
-      font-weight: bold;
-      letter-spacing: 1px;
+      margin-bottom: 60px;
+      font-size: 26px;
+      font-weight: 600;
+      letter-spacing: 3px;
+      position: relative;
+      line-height: 1.6;
+    }
+
+    .title::after {
+      content: '◆';
+      position: absolute;
+      bottom: -30px;
+      left: 50%;
+      transform: translateX(-50%);
+      color: var(--gold);
+      font-size: 14px;
+    }
+
+    .main-content {
+      display: flex;
+      flex-direction: column;
+      gap: 25px;
     }
 
     .card-row {
       display: flex;
-      justify-content: space-around;
-      margin-bottom: 40px;
+      justify-content: space-between;
+      gap: 20px;
     }
 
     .card {
-      background-color: var(--card-bg);
-      width: 120px;
-      height: 120px;
-      border-radius: 20px;
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+      background: var(--washi);
+      backdrop-filter: blur(10px);
+      flex: 1;
+      height: 160px;
+      border-radius: 12px;
+      border: 2px solid var(--border-color);
+      box-shadow: 
+        0 8px 24px var(--washi-shadow),
+        inset 0 1px 0 rgba(255, 255, 255, 0.8);
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       text-decoration: none;
-      transition: transform 0.2s ease;
+      transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+      max-width: 170px;
+      min-width: 160px;
+      aspect-ratio: 1;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(104, 211, 145, 0.1), transparent);
+      transition: left 0.8s ease;
     }
 
     .card:hover {
-      transform: translateY(-4px);
+      transform: translateY(-6px);
+      border-color: var(--moss);
+      background: linear-gradient(135deg, rgba(104, 211, 145, 0.05) 0%, var(--washi) 100%);
+      box-shadow: 
+        0 16px 40px rgba(44, 62, 80, 0.15),
+        0 8px 16px rgba(104, 211, 145, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.9);
+    }
+
+    .card:hover::before {
+      left: 100%;
     }
 
     .card img {
-      width: 48px;
-      height: 48px;
-      margin-bottom: 10px;
+      width: 56px;
+      height: 56px;
+      margin-bottom: 15px;
+      filter: drop-shadow(0 4px 8px rgba(44, 62, 80, 0.2));
+      transition: all 0.4s ease;
+      opacity: 0.8;
+    }
+
+    .card:hover img {
+      transform: scale(1.08);
+      filter: drop-shadow(0 6px 12px rgba(104, 211, 145, 0.3));
+      opacity: 1;
     }
 
     .card-label {
-      font-size: 14px;
-      font-weight: bold;
-      color: var(--text-color);
+      font-size: 16px;
+      font-weight: 500;
+      color: var(--text-primary);
+      letter-spacing: 1px;
     }
 
     .link-list {
@@ -85,59 +166,258 @@
     .link-item {
       display: flex;
       align-items: center;
-      background-color: var(--card-bg);
-      border-radius: 12px;
-      padding: 15px 20px;
+      background: var(--washi);
+      backdrop-filter: blur(10px);
+      border-radius: 8px;
+      padding: 18px 24px;
       text-decoration: none;
-      font-weight: bold;
-      color: var(--text-color);
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
-      transition: background-color 0.2s ease;
+      font-weight: 500;
+      color: var(--text-primary);
+      box-shadow: 
+        0 4px 16px var(--washi-shadow),
+        inset 0 1px 0 rgba(255, 255, 255, 0.6);
+      transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+      position: relative;
+      overflow: hidden;
+      border: 1px solid var(--border-color);
+      letter-spacing: 0.5px;
+    }
+
+    .link-item::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(214, 158, 46, 0.08), transparent);
+      transition: left 0.6s ease;
     }
 
     .link-item:hover {
-      background-color: var(--hover-bg);
+      transform: translateY(-2px);
+      border-color: var(--gold);
+      box-shadow: 
+        0 8px 24px rgba(44, 62, 80, 0.12),
+        0 4px 8px rgba(214, 158, 46, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.8);
+    }
+
+    .link-item:hover::before {
+      left: 100%;
     }
 
     .link-item img {
       width: 24px;
       height: 24px;
-      margin-right: 12px;
+      margin-right: 16px;
+      filter: drop-shadow(0 2px 4px rgba(44, 62, 80, 0.1));
+      transition: all 0.3s ease;
+      opacity: 0.7;
+    }
+
+    .link-item:hover img {
+      transform: scale(1.05);
+      filter: drop-shadow(0 4px 8px rgba(214, 158, 46, 0.2));
+      opacity: 1;
+    }
+
+    .wide-card {
+      background: var(--washi);
+      backdrop-filter: blur(10px);
+      border-radius: 10px;
+      padding: 24px 28px;
+      text-decoration: none;
+      font-weight: 600;
+      color: var(--text-primary);
+      box-shadow: 
+        0 6px 20px var(--washi-shadow),
+        inset 0 1px 0 rgba(255, 255, 255, 0.7);
+      transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+      display: flex;
+      align-items: center;
+      font-size: 18px;
+      position: relative;
+      overflow: hidden;
+      border: 1px solid var(--border-color);
+      letter-spacing: 1px;
+    }
+
+    .wide-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(197, 48, 48, 0.08), transparent);
+      transition: left 0.7s ease;
+    }
+
+    .wide-card:hover {
+      transform: translateY(-3px);
+      border-color: var(--red-brown);
+      box-shadow: 
+        0 12px 32px rgba(44, 62, 80, 0.15),
+        0 6px 12px rgba(197, 48, 48, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.8);
+    }
+
+    .wide-card:hover::before {
+      left: 100%;
+    }
+
+    .wide-card img {
+      width: 32px;
+      height: 32px;
+      margin-right: 18px;
+      filter: drop-shadow(0 2px 4px rgba(44, 62, 80, 0.1));
+      transition: all 0.3s ease;
+      opacity: 0.8;
+    }
+
+    .wide-card:hover img {
+      transform: scale(1.05);
+      filter: drop-shadow(0 4px 8px rgba(197, 48, 48, 0.2));
+      opacity: 1;
+    }
+
+    /* 780px以上の場合のレスポンシブデザイン */
+    @media (min-width: 780px) {
+      .container {
+        max-width: 1200px;
+        padding: 40px 20px;
+      }
+
+      .main-content {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 40px;
+        align-items: start;
+      }
+
+      .left-section {
+        display: flex;
+        flex-direction: column;
+        gap: 25px;
+      }
+
+      .right-section {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+      }
+
+      .card-row {
+        justify-content: center;
+        gap: 30px;
+      }
+
+      .card {
+        max-width: 180px;
+        min-width: 170px;
+        height: 180px;
+        border-radius: 16px;
+      }
+
+      .card img {
+        width: 64px;
+        height: 64px;
+      }
+
+      .card-label {
+        font-size: 18px;
+        font-weight: 500;
+      }
+
+      .wide-card {
+        padding: 28px 32px;
+        font-size: 20px;
+        border-radius: 12px;
+      }
+
+      .wide-card img {
+        width: 36px;
+        height: 36px;
+        margin-right: 24px;
+      }
+    }
+
+    /* モバイル表示での調整 */
+    @media (max-width: 479px) {
+      .container {
+        padding: 20px 15px;
+      }
+
+      .card-row {
+        gap: 15px;
+      }
+
+      .card {
+        height: 140px;
+        min-width: 140px;
+      }
+
+      .card img {
+        width: 48px;
+        height: 48px;
+      }
+
+      .card-label {
+        font-size: 14px;
+      }
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <div class="title">谷口ハートクリニック<br>発注ポータル</div>
+    <div class="title">谷口ハートクリニック<br>発注システム</div>
 
-    <div class="card-row">
-      <a href="https://docs.google.com/forms/d/e/1FAIpQLScXFDf3uCYEedzbE8vOteBPPaWsQr3YzocuD0_54OoaROGeMg/viewform?usp=preview" class="card">
-        <img src="https://img.icons8.com/ios-filled/50/shopping-cart.png" alt="発注">
-        <div class="card-label">発注する</div>
-      </a>
-      <a href="https://docs.google.com/forms/d/e/1FAIpQLSd6Vb55RfgEI2KJzyHM8rX0kSzNrSD6W_ah3dLps2TtQGg87A/viewform?usp=preview" class="card">
-        <img src="https://img.icons8.com/ios-filled/50/open-box.png" alt="受領">
-        <div class="card-label">受領する</div>
-      </a>
-    </div>
+    <div class="main-content">
+      <div class="left-section">
+        <div class="card-row">
+          <a href="https://docs.google.com/forms/d/e/1FAIpQLSd03L6R4544v0jbohfxmHBxv47GQiwNzoGB0DU8Zu526Oq6Kw/viewform?usp=header" class="card">
+            <img src="https://img.icons8.com/ios-filled/50/shopping-cart.png" alt="発注">
+            <div class="card-label">発注する</div>
+          </a>
+          <a href="https://docs.google.com/forms/d/e/1FAIpQLSfmycuvN8n1YzT5FYstF4IAPmJDHfx452Xf2HxhiRNy3bj_Qw/viewform?usp=dialog" class="card">
+            <img src="https://img.icons8.com/ios-filled/50/open-box.png" alt="受領">
+            <div class="card-label">受領する</div>
+          </a>
+        </div>
 
-    <div class="link-list">
-      <a href="https://docs.google.com/spreadsheets/d/1ZhVBCmtiEroldgOFnBiWsqTdmc8O301vYU2L3IVO-u8/edit?usp=sharing" class="link-item">
-        <img src="https://img.icons8.com/ios-filled/50/activity-history.png" alt="履歴">
-        発注履歴
-      </a>
-      <a href="https://docs.google.com/spreadsheets/d/1nt0l95dU44wB_dYeZAldIMKg6eYJ9_jCsW0HUqD_rlQ/edit?usp=sharing" class="link-item">
-        <img src="https://img.icons8.com/ios-filled/50/calendar--v1.png" alt="月別">
-        月別発注履歴
-      </a>
-      <a href="https://docs.google.com/spreadsheets/d/1N-Sd0pnFu5-VKhqrtKl2ONaEpNq5PCigtyMXUFbsYlk/edit?usp=sharing" class="link-item">
-        <img src="https://img.icons8.com/ios-filled/50/combo-chart.png" alt="年度集計">
-        年度別発注数集計
-      </a>
-      <a href="#" class="link-item">
-        <img src="https://img.icons8.com/ios-filled/50/help.png" alt="ガイド">
-        操作ガイド
-      </a>
+        <a href="https://docs.google.com/spreadsheets/d/11zdB_77rX5_4cM_SkQBoHu2vKaPho4hZu_v-D7JXKcY/edit?usp=sharing" class="wide-card">
+          <img src="./images/14367.svg" alt="当日発注">
+          当日発注メール送信
+        </a>
+      </div>
+
+      <div class="right-section">
+        <a href="https://docs.google.com/spreadsheets/d/1mU2DvnD6ELDbr-24AjtdKOEdxPoE9738cMZpKD8PRzs/edit?usp=sharing" class="link-item">
+          <img src="./images/14368.svg" alt="履歴">
+          発注・到着状況を確認する
+        </a>
+        <a href="https://docs.google.com/spreadsheets/d/1nt0l95dU44wB_dYeZAldIMKg6eYJ9_jCsW0HUqD_rlQ/edit?usp=sharing" class="link-item">
+          <img src="https://img.icons8.com/ios-filled/50/calendar--v1.png" alt="月別">
+          月別発注履歴
+        </a>
+        <a href="https://docs.google.com/spreadsheets/d/1N-Sd0pnFu5-VKhqrtKl2ONaEpNq5PCigtyMXUFbsYlk/edit?usp=sharing" class="link-item">
+          <img src="https://img.icons8.com/ios-filled/50/combo-chart.png" alt="年度集計">
+          年度別発注数集計
+        </a>
+        <a href="#" class="link-item">
+          <img src="https://img.icons8.com/ios-filled/50/help.png" alt="ガイド">
+          Gmail
+        </a>
+        <a href="#" class="link-item">
+          <img src="./images/14369.svg" alt="ガイド">
+          物品変更・お知らせ
+        </a>
+        <a href="#" class="link-item">
+          <img src="./images/14366.svg" alt="ガイド">
+          操作ガイド
+        </a>
+      </div>
     </div>
   </div>
 </body>
