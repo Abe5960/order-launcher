@@ -56,7 +56,7 @@
     .title {
       color: var(--sumi-dark);
       text-align: center;
-      margin-bottom: 60px;
+      margin-bottom: 30px;
       font-size: 26px;
       font-weight: 600;
       letter-spacing: 3px;
@@ -64,20 +64,20 @@
       line-height: 1.6;
     }
 
-    .title::after {
-      content: '♦';
+    /*.title::after {
+      content: '';
       position: absolute;
       bottom: -30px;
-      left: 50%;
-      transform: translateX(-50%);
-      color: var(--gold);
-      font-size: 14px;
-    }
+      left: 5
 
     .main-content {
       display: flex;
       flex-direction: column;
       gap: 25px;
+    }*/
+
+    .right-section{
+      margin-top: 30px;
     }
 
     .card-row {
@@ -94,14 +94,14 @@
       border-radius: 12px;
       border: 2px solid var(--border-color);
       box-shadow: 
-        0 8px 24px var(--washi-shadow),
-        inset 0 1px 0 rgba(255, 255, 255, 0.8);
+      0 8px 24px var(--washi-shadow),
+      inset 0 1px 0 rgba(255, 255, 255, 0.8); /* ← 通常時の影は残す */
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       text-decoration: none;
-      transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+      transition: transform 0.3s ease, opacity 0.3s ease; /* ← 影はアニメ対象にしない */
       max-width: 170px;
       min-width: 160px;
       aspect-ratio: 1;
@@ -110,6 +110,12 @@
       margin-left: 20px;
       margin-right: 20px;
     }
+
+.card:hover {
+  transform: scale(1.08); /* ← 拡大だけ */
+  /* box-shadow, border-color の変更は消す */
+}
+
 
     .card::before {
       content: '';
@@ -126,10 +132,7 @@
       transform: translateY(-6px);
       border-color: var(--moss);
       background: linear-gradient(135deg, rgba(104, 211, 145, 0.05) 0%, var(--washi) 100%);
-      box-shadow: 
-        0 16px 40px rgba(44, 62, 80, 0.15),
-        0 8px 16px rgba(104, 211, 145, 0.1),
-        inset 0 1px 0 rgba(255, 255, 255, 0.9);
+  
     }
 
     .card:hover::before {
@@ -239,7 +242,7 @@
       box-shadow: 
         0 6px 20px var(--washi-shadow),
         inset 0 1px 0 rgba(255, 255, 255, 0.7);
-      transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+      transition: transform 0.3s ease, opacity 0.3s ease;;
       display: flex;
       align-items: center;
       font-size: 18px;
